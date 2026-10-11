@@ -21,7 +21,8 @@
         radial-gradient(circle at 85% 78%, rgba(255,214,225,.8), transparent 32%),
         linear-gradient(145deg,#fff9f5 0%,#ffe9ef 52%,#ffd8e5 100%);
     }
-    main { position:relative; min-height:100svh; display:grid; place-items:center; padding:28px; isolation:isolate; }
+    body.revealed { overflow-x:hidden; overflow-y:auto; }
+    main { position:relative; min-height:100svh; display:grid; place-items:center; padding:28px; isolation:isolate; overflow:hidden; }
     .glow { position:absolute; inset:0; background:radial-gradient(circle at 50% 48%,rgba(255,255,255,.85),transparent 42%); z-index:-2; }
     .symbols {
       border:0; background:rgba(255,255,255,.58); color:#c86080; cursor:pointer;
@@ -46,6 +47,14 @@
     .revealed .message { opacity:1; }
     .revealed .card { animation:reveal .9s cubic-bezier(.2,.85,.28,1.15) forwards; }
     .revealed .forever { animation:fadeUp .7s 1.05s ease forwards; }
+    .gallery { display:none; position:relative; padding:48px 20px max(72px,env(safe-area-inset-bottom)); text-align:center; }
+    body.revealed .gallery { display:block; animation:fadeUp .7s 1.2s both; }
+    .gallery h2 { margin:0 auto 26px; color:#a35974; font-size:clamp(18px,5vw,24px); font-weight:500; letter-spacing:3px; }
+    .photos { max-width:800px; margin:auto; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; align-items:start; }
+    .photos figure { margin:0; padding:9px 9px 19px; border-radius:22px; background:rgba(255,255,255,.85); box-shadow:0 16px 45px rgba(169,64,97,.17); transform:rotate(-2deg); }
+    .photos figure:nth-child(2) { transform:rotate(2deg); }
+    .photos img { width:100%; height:auto; aspect-ratio:1279/1706; display:block; object-fit:cover; border-radius:15px; }
+    @media (max-width:600px) { .photos { max-width:400px; grid-template-columns:1fr; gap:28px; } .gallery { padding-top:40px; } }
     .heart { position:absolute; bottom:-45px; z-index:-1; opacity:0; user-select:none; pointer-events:none; animation:rise var(--d) var(--delay) ease-in forwards; }
     @keyframes float { 50% { transform:translateY(-8px); } }
     @keyframes reveal { to { transform:scale(1) translateY(0); } }
@@ -70,11 +79,19 @@
       </div>
     </section>
   </main>
+  <section class="gallery" aria-label="两张珍藏的照片">
+    <h2>把喜欢的瞬间，也放在这里 ♡</h2>
+    <div class="photos">
+      <figure><img src="assets/portrait-1.jpg" width="1279" height="1706" alt="她的第一张照片" loading="lazy" decoding="async"></figure>
+      <figure><img src="assets/portrait-2.jpg" width="1279" height="1706" alt="她的第二张照片" loading="lazy" decoding="async"></figure>
+    </div>
+  </section>
   <script>
     const scene = document.querySelector('#scene');
     document.querySelector('#open').addEventListener('click', () => {
       if (scene.classList.contains('revealed')) return;
       scene.classList.add('revealed');
+      document.body.classList.add('revealed');
       const icons = ['♡','♥','💕','💗','✦'];
       for (let i=0;i<34;i++) {
         const h=document.createElement('span'); h.className='heart';
@@ -91,3 +108,4 @@
   </script>
 </body>
 </html>
+
