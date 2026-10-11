@@ -43,10 +43,12 @@
     .love { margin-top:12px; color:var(--deep); }
     .emoji { margin:22px 0 0; font:30px/1.55 system-ui,sans-serif; letter-spacing:5px; }
     .forever { margin-top:22px; font-size:15px; letter-spacing:4px; color:#9e6678; opacity:0; }
+    .scroll-cue { position:absolute; bottom:calc(20px + env(safe-area-inset-bottom)); left:0; right:0; margin:0; text-align:center; color:#a66c80; font:13px/1.5 system-ui,sans-serif; letter-spacing:2px; opacity:0; pointer-events:none; }
     .revealed .symbols { opacity:0; transform:scale(.7); animation:none; pointer-events:none; }
     .revealed .message { opacity:1; }
     .revealed .card { animation:reveal .9s cubic-bezier(.2,.85,.28,1.15) forwards; }
     .revealed .forever { animation:fadeUp .7s 1.05s ease forwards; }
+    .revealed .scroll-cue { animation:fadeUp .7s 1.8s ease forwards; }
     .gallery { display:none; position:relative; padding:48px 20px max(72px,env(safe-area-inset-bottom)); text-align:center; }
     body.revealed .gallery { display:block; animation:fadeUp .7s 1.2s both; }
     .gallery h2 { margin:0 auto 26px; color:#a35974; font-size:clamp(18px,5vw,24px); font-weight:500; letter-spacing:3px; }
@@ -78,6 +80,7 @@
         <p class="forever">今天爱你，明天也爱你</p>
       </div>
     </section>
+    <p class="scroll-cue">↓ 还有两张照片想给你看</p>
   </main>
   <section class="gallery" aria-label="两张珍藏的照片">
     <h2>把喜欢的瞬间，也放在这里 ♡</h2>
